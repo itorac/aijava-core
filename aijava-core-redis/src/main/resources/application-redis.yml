@@ -1,0 +1,59 @@
+#spring:
+#  redis:
+#     database: 0
+  # 单机版本配置
+#  host: 127.0.0.1
+#  port: 6379
+  
+  # 集群配置
+ # cluster:
+ #   max-redirects: 1
+ #   nodes:
+ #    - 127.0.0.1:6377
+ #    - 127.0.0.1:6378 
+ #    - 127.0.0.1:6379
+ # password:
+  
+#  lettuce:
+#    pool:
+#      max-active: 20
+#      max-idle: 100
+#      max-wait: 1000
+#      min-idle: 0
+#  timeout: 1000
+
+spring:
+  ##redis配置
+  redis:
+    #写入
+    master:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      timeout: 2000
+#      sentinel:
+#        master: mymaster
+#        nodes:
+#         - 192.168.229.200:26379
+#         - 192.168.229.201:26379
+#         - 192.168.229.202:26379
+      password:
+      lettuce:
+       pool:
+         maxActive: 8
+         minIdle: 1
+         maxIdle: 100
+         maxWait: 1000
+      #只读
+    slave:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      timeout: 2000
+      password:
+      lettuce:
+       pool:
+         maxActive: 8
+         minIdle: 1
+         maxIdle: 100
+         maxWait: 100

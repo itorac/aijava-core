@@ -1,0 +1,49 @@
+package com.cig.core.dal.datasource.config;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import com.aijava.core.dal.datasource.DynamicDataSource;
+
+//@Configuration
+public class SqlSessionFactoryConfig {
+
+	@Value(value = "${spring.mybatis.aliases-package:com.cig.*.pojo}")
+	private String aliasesPackage;
+
+	@Resource
+	private DynamicDataSource dynamicDataSource;
+	
+	//@Resource
+	//private MyInterceptor  myInterceptor;
+
+	/**
+	 * /**
+	 * 
+	 * @Title: sqlSessionFactoryBean
+	 * @Description: 构建SqlSessionFactory
+	 * @return
+	 * @throws Exception
+	 * @author xiegr
+	 * @date 2021-12-06 02:26:12
+	 */
+	@Bean(name = "sqlSessionFactory")
+	public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		// sqlSessionFactoryBean.setDataSource(dynamicDataSource());
+		sqlSessionFactoryBean.setDataSource(dynamicDataSource);
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:META-INF/mapper/**/*.xml"));
+		// mybatis别名
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:META-INF/spring/mybatis-config.xml"));
+		sqlSessionFactoryBean.setTypeAliasesPackage(aliasesPackage);
+		//sqlSessionFactoryBean.setPlugins(myInterceptor);
+		return sqlSessionFactoryBean.getObject();
+	}
+
+}

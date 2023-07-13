@@ -1,0 +1,17 @@
+﻿200:
+  message: "成功"
+
+500:
+  message: "不接受此平台"
+ 
+503:
+  message: "登录失败"
+  
+412:
+  message: "%s"
+  
+998:
+  message: 操作失败
+
+999:
+  message: Service {0} is not available!
