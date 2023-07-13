@@ -62,3 +62,8 @@
      <version>版本号</version>
     </dependency>
 ```
+
+6.协议
+```
+本仓库的代码依照 Apache-2.0 协议开源，本框架的权重的使用则需要遵循 Model License。申请商用许可与作者联系 itorac@sina.com.cn
+```
